@@ -7,9 +7,12 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
+  , mongoose = require('mongoose')
   , path = require('path');
 
 var app = express();
+
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/arcreactor');
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
