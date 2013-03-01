@@ -28,27 +28,9 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-<<<<<<< HEAD
-app.get('/users', user.list);
-=======
 app.post('/mash', user.mash);
 app.post('/upload', user.upload);
->>>>>>> abcd332ee107f68c38cbab8b61d4878c983fa4e1
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
-
-// var echojs = require('echojs');
-
-// var echo = echojs({
-//   key: 'VZC2UXVOYIIFGURRH'
-// });
-
-// // http://developer.echonest.com/docs/v4/song.html#search
-// echo('song/search').get({
-//   artist: 'radiohead',
-//   title: 'karma police'
-// }, function (err, json) {
-//   console.log(json.response);
-// });
