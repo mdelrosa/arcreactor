@@ -1,5 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+
+  div.chord
+
+  script
+
+    var dataset = {
+      counts: [#{counts}]
+    };
+
+  script(src="/javascripts/ring.js")
