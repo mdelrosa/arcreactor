@@ -8,5 +8,5 @@ exports.index = function(req, res){
   for (i=0;i<10;i++) {
   	counts.push(Math.floor(Math.random()*10))
   }
-  res.render('index', { title: 'ArcReactor', counts: counts});
+  res.render('homepage', { title: 'ArcReactor', counts: counts, Songs:""});
 };

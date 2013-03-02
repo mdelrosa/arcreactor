@@ -1,0 +1,12 @@
+//- jade partial that given a list of the songs in the db, 
+//- creates a form with checkboxes for each song that posts
+//- to /mash with the song ids for use with remix
+
+h1(class="text-center") Songlist:
+form(action='/mash', method='post')
+	each song in Songs
+		label(class='checkbox')
+			input(type='checkbox', value='#{song.id}')
+			|#{song.name} by #{song.artist}
+	input(type='submit', class='btn btn-primary', value='Arc these Songs!')'
+		
