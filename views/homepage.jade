@@ -1,14 +1,28 @@
 extends layout
 
 block content
-	div(class='container')
-		h1(class='text-center') #{title}
-		h3(class='text-center') Your favorite music, all in one mashup
-		div(class='hero-unit text-center')
-			form(id='upload')
-				legend Can't find the song you want? Upload it!
-				label Enter the location of the file you want to upload
-				div(class="input-append")
-					input(type="text", id="location", placeholder="File Directory")
-					input(type='submit', class='btn', value='upload')
-		include _songs
+	div(class='container-fluid')
+		div(class='row-fluid')
+			div(class='span12')
+				h1(class='text-center') #{title}
+				h3(class='text-center') Your favorite music, all in one mashup
+				div(class='hero-unit text-center')
+					form(class='form-horizontal', id='upload')
+						div(class='inline-block')
+							legend Can't find the song you want? Upload it!
+							div(class="control-group")
+								label(class="control-label", for='song') Song Title
+								div(class="controls")
+									input(type="text", id="song", placeholder="Song")
+							div(class="control-group")
+								label(class="control-label", for='artist') Artist name
+								div(class="controls")
+									input(type="text", id="artist", placeholder="Artist")
+							div(class="control-group")
+								label(class="control-label", for='location') File Location
+								div(class="controls")
+									input(type="text", id="location", placeholder="File Directory")
+										span(class='help-inline')Make sure this is the location of an audio file
+							div(class="form-actions")
+								input(type="submit", class='btn ', value="Upload")
+				include _songs
