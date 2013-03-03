@@ -1,11 +1,24 @@
 extends layout
 
 block content
+  div.audio
+    audio(src="/media/codemonkey.mp3")
 
   div.chord
 
-  script
+  | Welcome to Assemble.html
+  #info  
+    #bars  
+    #beats  
+    input#indexBox(type='text')
+    button.addBar Add bar from Track 1
+    button.addBeat Add beat from Track 1
+    br
+    button.playerStop Stop!
 
+
+  script
+    
     var dataset = {
       counts: [#{counts}]
     };
