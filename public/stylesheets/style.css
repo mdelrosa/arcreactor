@@ -10,3 +10,7 @@ a {
 .chord {
 	text-align: center;
 }
+
+.inline-block {
+	display: inline-block;
+}

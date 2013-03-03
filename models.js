@@ -1,8 +1,10 @@
 var mongoose = require('mongoose');
 
 var SongSchema = mongoose.Schema({
-	id: String,
-	beats: String
+	name: String,
+	artist: String,
+	src: String,
+	id: String
 });
 
 var Song = mongoose.model('Song', SongSchema);

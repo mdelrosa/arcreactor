@@ -12,5 +12,5 @@ exports.upload = function(req, res){
 };
 
 exports.mash = function(req, res){
-  res.render("mash", {title: Mashup});
+  res.render("mash", {title: 'Mashup'});
 };
