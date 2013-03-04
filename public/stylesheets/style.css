@@ -15,13 +15,12 @@ a {
 	display: inline-block;
 }
 
-<<<<<<< HEAD
-.image {
 
-=======
+.image {
+}
+
 #song-title {
 	position: relative;
 	top: 285px;
 	min-width: 960px;
->>>>>>> 96136f5e38e3ce4b9eb53c2c6e254c6a59517d43
 }
