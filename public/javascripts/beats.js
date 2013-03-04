@@ -8,7 +8,7 @@ $(document).ready(function() {
   var trackID = $('.chord').attr('name');
   var trackURL = 'media/codemonkey.mp3';
 
-  console.log($());
+  console.log(trackID);
 
   var remixer;
   var player;
@@ -28,6 +28,7 @@ $(document).ready(function() {
 
   function init() {
     console.log('here')
+    var beats = [];
     if (window.webkitAudioContext === undefined) {
       error("Sorry, this app needs advanced web audio. Your browser doesn't support it. Try the latest version of Chrome");
     } 
@@ -56,4 +57,9 @@ $(document).ready(function() {
   }
 
   window.onload = init;
+  setInterval(updateName, 100)
 });
+
+function updateName () {
+  $("#song-title").text('Song!')
+}

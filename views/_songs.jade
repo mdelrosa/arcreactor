@@ -2,7 +2,7 @@
 //- creates a form with checkboxes for each song that posts
 //- to /mash with the song ids for use with remix
 
-h1(class="text-center") Songlist:
+h1(class="text-center") Song List:
 form(action='/mash', method='post')
 	each song in Songs
 		label(class='checkbox')

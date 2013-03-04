@@ -5,7 +5,11 @@ block content
     p.currentAudio()
     audio(src="/media/codemonkey.mp3")
 
-  div.#info  
+  div.chord(name=trackID)
+    h2(class='text-center', id='song-title') Song Title
+  | Welcome to Assemble.html
+
+  #info  
     #bars  
     #beats  
     input#indexBox(type='text')
@@ -13,8 +17,6 @@ block content
     button.addBeat Add beat from Track 1
     br
     button.playerStop Stop!
-
-  div.chord(name=trackID)
 
   script
     

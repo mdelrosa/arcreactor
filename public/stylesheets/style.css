@@ -14,3 +14,13 @@ a {
 .inline-block {
 	display: inline-block;
 }
+
+
+.image {
+}
+
+#song-title {
+	position: relative;
+	top: 285px;
+	min-width: 960px;
+}
