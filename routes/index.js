@@ -1,7 +1,5 @@
-
-/*
- * GET home page.
- */
+var models = require('../models'),
+Song = models.Song;
 
 var echojs = require('echojs'),
     echoAPI = "VZC2UXVOYIIFGURRH";
@@ -11,12 +9,20 @@ var echo = echojs({
 });
 
 exports.index = function(req, res){
+  Song.find().sort({'_id' : 'descending'}).exec(function(err,data){
+    if (err)
+      return console.log ('error', err);
+    res.render('homepage', { title: 'Arc Reactor', Songs: data});
+  });
+};
+
+
+
   //randomly generate pie graphic
-  var counts = [];
-  for (i=0;i<10;i++) {
-  	counts.push(Math.floor(Math.random()*10))
-  }
-  res.render('homepage', { title: 'Arc Reactor', counts: counts, Songs:""});
+  // var counts = [];
+  // for (i=0;i<10;i++) {
+  //  counts.push(Math.floor(Math.random()*10))
+  // }
 
   // echo('song/search').get({
   //   artist: 'psy',
@@ -39,4 +45,12 @@ exports.index = function(req, res){
   //   console.log(trackID);
   //   res.render('index', { title: 'ArcReactor', counts: counts, APIkey: echoAPI, trackID: trackID});
   // });
+// };
+
+exports.update = function(req, res){
+  Song.find().sort({'_id' : 'descending'}).exec(function(err,data){
+    if (err)
+      return console.log ('error', err);
+    res.render('_songs', {Songs: data});
+  });
 };
