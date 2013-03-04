@@ -52,6 +52,13 @@ exports.upload = function(req, res){
 };
 
 exports.mash = function(req, res){
-	console.log(req.body);
-	res.render("mash", {title: 'Mashup'});
+	var mongoIDs = req.body.songs,
+	songs = [];
+	Song.find({_id: {$in: mongoIDs}}).exec(function(err, data){
+		console.log(data);
+		for (i in data){
+			console.log(data[i].name);
+		}
+		res.render("mash", {title: 'Mashup'});
+	});
 };

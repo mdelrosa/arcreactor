@@ -21,11 +21,12 @@ $(document).ready(function(){
 		}
 		return false;
 	});
-	setInterval(updateSongs(), 2000)
+	setInterval(updateSongs, 2000)
 });
 
 function updateSongs(){
   $.get('/update', function(data){
+  	console.log('2 seconds later')
     $('#songs').html(data);
   });
 }
