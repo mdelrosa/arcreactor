@@ -5,8 +5,10 @@
 
 $(document).ready(function() {
   var apiKey = 'VZC2UXVOYIIFGURRH';
-  var trackID = 'SOSOCSP13AAD11E0A6';
-  var trackURL = 'media/codemonkey.mp3'
+  var trackID = $('.chord').attr('name');
+  var trackURL = 'media/codemonkey.mp3';
+
+  console.log($());
 
   var remixer;
   var player;
@@ -25,6 +27,7 @@ $(document).ready(function() {
   });
 
   function init() {
+    console.log('here')
     if (window.webkitAudioContext === undefined) {
       error("Sorry, this app needs advanced web audio. Your browser doesn't support it. Try the latest version of Chrome");
     } 
