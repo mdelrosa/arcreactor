@@ -52,6 +52,10 @@ exports.upload = function(req, res){
 };
 
 exports.mash = function(req, res){
-	console.log(req.body);
-	res.render("mash", {title: 'Mashup'});
+	console.log(req.body.ids);
+	var counts = [];
+    for (i=0;i<10;i++) {
+     counts.push(Math.floor(Math.random()*10))
+    }
+	res.render("mash", {title: 'Mashup', counts: counts, ids: req.body.ids});
 };

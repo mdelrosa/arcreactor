@@ -9,6 +9,7 @@ $(document).ready(function() {
   var trackURL = 'media/codemonkey.mp3';
 
   console.log(trackID);
+  console.log(trackID.length)
 
   var remixer;
   var player;
