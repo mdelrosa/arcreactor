@@ -6,7 +6,7 @@ h1(class="text-center") Song List:
 form(action='/mash', method='post')
 	each song in Songs
 		label(class='checkbox')
-			input(type='checkbox', value='#{song.id}')
+			input(type='checkbox', name= 'ids', value='#{song.id}')
 			|#{song.name} by #{song.artist}
 	input(type='submit', class='btn btn-primary', value='Arc these Songs!')'
 		
