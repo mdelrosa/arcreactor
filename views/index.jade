@@ -17,11 +17,14 @@ block content
     button.addBeat Add beat from Track 1
     br
     button.playerStop Stop!
+    
+  div(class='hidden', id='trackID') #{trackID}
 
   script
-    
     var dataset = {
       counts: [#{counts}]
     };
 
+  script(src="/javascripts/remix.js")
+  script(src='/javascripts/beats.js')
   script(src="/javascripts/ring.js")

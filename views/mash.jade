@@ -2,4 +2,13 @@ extends layout
 
 block content
 
-  div.chord
+  div.chord(name=)
+
+  script
+    var dataset = {
+      counts: [#{counts}]
+    };
+
+  script(src="/javascripts/remix.js")
+  script(src='/javascripts/beats.js')
+  script(src="/javascripts/ring.js")
