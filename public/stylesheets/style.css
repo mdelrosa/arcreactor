@@ -23,4 +23,5 @@ a {
 	position: relative;
 	top: 285px;
 	min-width: 960px;
+	z-index: -1;
 }

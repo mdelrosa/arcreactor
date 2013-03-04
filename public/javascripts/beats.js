@@ -5,7 +5,8 @@
 
 $(document).ready(function() {
   var apiKey = 'VZC2UXVOYIIFGURRH';
-  var trackID = 'SOSOCSP13AAD11E0A6';
+  console.log($('#trackID'));
+  var trackID = $('#trackID').text();
   var trackURL = 'media/codemonkey.mp3'
 
   var remixer;

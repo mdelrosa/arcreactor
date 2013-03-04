@@ -3,7 +3,7 @@ $(document).ready(function(){
 		var song = $('#song').val();
 		var artist = $('#artist').val();
 		var location = $('#location').val();
-		if (location){		
+		if (location){	
 			$.post("/upload", { "song": song, "artist": artist, "location": location },
 				function(err){
 					console.log(err);
@@ -21,3 +21,4 @@ $(document).ready(function(){
 		}
 		return false;
 	});
+});
