@@ -18,9 +18,11 @@ exports.index = function(req, res){
   }
   echo('song/search').get({
     artist: 'taylor swift',
-    title: 'trouble'
+    title: 'trouble',
+    bucket: ['tracks', 'id:7digital-US']
   }, function (err, json) {
     console.log(json.response);
+    console.log(json.response.songs.title);
   });
   res.render('index', { title: 'ArcReactor', counts: counts, APIkey: echoAPI});
 };

@@ -53,4 +53,9 @@ $(document).ready(function() {
   }
 
   window.onload = init;
+  setInterval(updateName, 100)
 });
+
+function updateName () {
+  $("#song-title").text('Song!')
+}
