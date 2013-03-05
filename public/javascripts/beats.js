@@ -15,6 +15,7 @@ $(document).ready(function() {
   var player;
   var track;
   var remixed;
+  var tracks;
 
   $('.addBar').click(function() {
     var index = $("#indexBox").val();
@@ -29,37 +30,45 @@ $(document).ready(function() {
 
   function init() {
     var beats = [];
+    var context = new webkitAudioContext();
+    remixer = createJRemixer(context, $, apiKey);
+    player = remixer.getPlayer();
     if (window.webkitAudioContext === undefined) {
       error("Sorry, this app needs advanced web audio. Your browser doesn't support it. Try the latest version of Chrome");
     } 
     else {
-      var tracks = [];
-      for (i=0; i<trackIDs.length; i++) {
-        var context = new webkitAudioContext();
-        remixer = createJRemixer(context, $, apiKey);
-        player = remixer.getPlayer();
-        $("#info").text("Loading analysis data...");
-
-        remixer.remixTrackById(trackIDs[i], trackURL, function(t, percent) {
-          track = t;
-
-          $("#info").text(percent + "% of Track "+i+"loaded");
-          if (percent == 100) {
-            $("#info").text(percent + "% of the track loaded, remixing...");
-          }
-
-          if (track.status == 'ok') {
-            $("#bars").text("The track has " + track.analysis.bars.length + " bars");
-            $("#beats").text("The track has " + track.analysis.beats.length + " beats");
-            $("#info").text("Remix complete!");
-            tracks.push(track);
-            console.log(track);
-          }
-        });
-      }
-      console.log(tracks)
+      tracks = [];
+      remixAllTheTracks(trackIDs.length);
     }
   }
+
+
+  function remixAllTheTracks(num){
+    if (num<1){
+      console.log('base case');
+      console.log(tracks);
+    }
+    else{
+      remixer.remixTrackById(trackIDs[num-1], trackURL, function(t, percent){
+        track = t;
+
+        $("#info").text(percent + "% of Track "+(trackIDs.length-num)+"loaded");
+        if (percent == 100) {
+          $("#info").text(percent + "% of the track loaded, remixing...");
+        }
+
+        if (track.status == 'ok') {
+          $("#bars").text("The track has " + track.analysis.bars.length + " bars");
+          $("#beats").text("The track has " + track.analysis.beats.length + " beats");
+          $("#info").text("Remix complete!");
+          tracks.push(track);
+          console.log(track);
+          remixAllTheTracks(num-1);
+        }
+      });
+    }
+  }
+
 
   window.onload = init;
   setInterval(updateName, 100)
@@ -68,3 +77,4 @@ $(document).ready(function() {
 function updateName () {
   $("#song-title").text('Song!')
 }
+
