@@ -45,15 +45,15 @@ $(document).ready(function() {
   // create html to add the song names to mash.jade
   function getNewHTML(srcs, tracks) {
     var titles = [];
-    var newHTML = '<div>';    
+    var newHTML = '<div class="audioMain">';    
     for (i=0;i<tracks.length;i++) {
       titles.push(tracks[i].title)
-      newHTML += '<p name='+srcs[i]+'> '+tracks[i].title+'</p>';
+      newHTML += '<p name='+srcs[i]+'> '+tracks[i].title+'</p><audio id='+tracks[i].title+' src='+srcs[i]+'></audio>';
     }
-    newHTML += '<button class="control"></div>';
+    newHTML += '</div>';
     console.log('newHTML', newHTML);
     // we need to push the initial audio source onto the jade; do that here
-    $('audio').attr('src', srcs[0]);
+    $('.audioMain').append(newHTML)
     $('audio')[0].play();
     //start up switcher
     fireInterval();
@@ -79,20 +79,19 @@ $(document).ready(function() {
       window.bars = bars;
       window.durations = durations;
       window.tracks = tracks;
-      console.log(tracks);
       window.trackNames = [];
-      for (i in tracks) {
+      for (i=0;i<tracks.length;i++) {
         window.trackNames.push(tracks[i].title);
       }
+      // console.log('trackNames: init', window.trackNames)
       window.currentIndex = 0;
-      window.nextSwitchIn = 20;
-      window.sinceLast
+      window.switchDuration = 10;
+      window.nextSwitchIn = 5;
       //render ring based on duration of each bar
       renderRing(durations);
       // get track titles/sources, append them to target div
       var srcs = $('.links').attr('name').split(',');
       var newHTML = getNewHTML(srcs, tracks.reverse());
-      $('.songsTarget').append(newHTML)
       // $('body').append('<script src="/javascripts/switch.js" />');
     }
     else{
@@ -138,33 +137,52 @@ $(document).ready(function() {
         i = 0,
         trueI = 0,
         delta = 5;
-    while (timeCheck <= currentTime) {
+    var trackNames = [];
+    for (i=0;i<window.tracks.length;i++) {
+      trackNames.push(window.tracks[i].title);
+    }
+    console.log('newTracksNames', trackNames);
+    while (timeCheck <= currentTime && i < window.bars.length) {
       if (bars[i].track.title === window.tracks[window.currentIndex].title) {
         timeCheck += parseInt(bars[i].duration);
         trueI += 1;
       }
       i+=1
     }
-    console.log('absolute index', i)
+    // console.log('absolute index', i)
     window.nextSwitchIn -= 1;
     console.log(nextSwitchIn);
     if (window.nextSwitchIn <= 0) {
       for (j=0;j<=bars.length;j++) {
-        if (bars[j].track.title !== window.tracks[window.currentIndex].title) {
+        if (!(bars[j].track.title === window.tracks[window.currentIndex].title) && (Math.floor(2*Math.random()))) {
+          // console.log('checkTitle', bars[j].track.title)
+          // console.log('currentTitle', window.tracks[window.currentIndex].title)
           var currentTimbre = 0,
               checkTimbre = 0;
           for (k=0;k<12;k++) {
             currentTimbre += parseInt(bars[i].oseg.timbre[k])/12;
             checkTimbre += parseInt(bars[j].oseg.timbre[k])/12;
           }
-          console.log(currentTimbre)
-          console.log(checkTimbre)
           if (checkTimbre>(currentTimbre-delta) && checkTimbre<(currentTimbre+delta)) {
-            window.currentIndex = window.trackNames.indexOf(bars[j].track.title);
-            $('audio').attr('src', $('p:contains('+bars[j].track.title+')').attr('name'));
-            $('audio').currentTime = bars[j].start;
-            $('audio')[0].play();
-            window.nextSwitchIn = 20;
+            var pauseThis = document.getElementById(window.trackNames[window.currentIndex].split(' ')[0]);
+            pauseThis.pause();
+            
+            window.currentIndex = trackNames.indexOf(bars[j].track.title);
+            console.log('currentTrackTitle', bars[j].track.title)
+            console.log('trackNames', trackNames);
+            console.log('currentIndex', window.currentIndex)
+            // $('#audioMain').attr('src', $('p:contains('+bars[j].track.title+')').attr('name'));
+            var timeChanger = document.getElementById(window.trackNames[window.currentIndex].split(' ')[0]);
+            timeChanger.play();
+            // console.log('before', $('#audioMain').attr('currentTime'));
+            console.log('audioElement', timeChanger)
+            console.log(bars[j].start);
+            console.log(timeChanger.currentTime);
+            timeChanger.currentTime = parseInt(bars[j].start);
+            // $('#audioMain').attr('currentTime', bars[j].start);
+            // console.log('after', $('#audioMain').attr('currentTime'));
+            window.nextSwitchIn = window.switchDuration;
+            break;
           }
         }
       }

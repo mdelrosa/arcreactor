@@ -2,18 +2,14 @@ extends layout
 
 block content
   
-  div.audio
-    div.currentAudio
-    div.currentTime
-    audio.audioMain(src='none')
-
   div.links(name=links)
 
   div.chord(name=ids)
       h5(id='song-title', class='text-center')|Song Title
 
   div.span8
-    div.songsTarget
+  div.nowPlaying(name='none')
+    div.songsTarget.audioMain
       h4 Mashup Songs
 
   script
