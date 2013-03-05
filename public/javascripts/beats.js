@@ -5,11 +5,11 @@
 
 $(document).ready(function() {
   var apiKey = 'VZC2UXVOYIIFGURRH';
-  var trackID = $('.chord').attr('name');
+  var trackID_string = $('.chord').attr('name');
   var trackURL = 'media/codemonkey.mp3';
 
-  console.log(trackID);
-  console.log(trackID.length)
+  var trackIDs = trackID_string.split(',');
+  console.log('trackIDs', trackIDs);
 
   var remixer;
   var player;
@@ -28,32 +28,36 @@ $(document).ready(function() {
   });
 
   function init() {
-    console.log('here')
     var beats = [];
     if (window.webkitAudioContext === undefined) {
       error("Sorry, this app needs advanced web audio. Your browser doesn't support it. Try the latest version of Chrome");
     } 
     else {
-      var context = new webkitAudioContext();
-      remixer = createJRemixer(context, $, apiKey);
-      player = remixer.getPlayer();
-      $("#info").text("Loading analysis data...");
+      var tracks = [];
+      for (i=0; i<trackIDs.length; i++) {
+        var context = new webkitAudioContext();
+        remixer = createJRemixer(context, $, apiKey);
+        player = remixer.getPlayer();
+        $("#info").text("Loading analysis data...");
 
-      remixer.remixTrackById(trackID, trackURL, function(t, percent) {
-        track = t;
+        remixer.remixTrackById(trackIDs[i], trackURL, function(t, percent) {
+          track = t;
 
-        $("#info").text(percent + "% of the track loaded");
-        if (percent == 100) {
-          $("#info").text(percent + "% of the track loaded, remixing...");
-        }
+          $("#info").text(percent + "% of Track "+i+"loaded");
+          if (percent == 100) {
+            $("#info").text(percent + "% of the track loaded, remixing...");
+          }
 
-        if (track.status == 'ok') {
-          $("#bars").text("The track has " + track.analysis.bars.length + " bars");
-          $("#beats").text("The track has " + track.analysis.beats.length + " beats");
-          $("#info").text("Remix complete!");
-          console.log(track);
-        }
-      });
+          if (track.status == 'ok') {
+            $("#bars").text("The track has " + track.analysis.bars.length + " bars");
+            $("#beats").text("The track has " + track.analysis.beats.length + " beats");
+            $("#info").text("Remix complete!");
+            tracks.push(track);
+            console.log(track);
+          }
+        });
+      }
+      console.log(tracks)
     }
   }
 

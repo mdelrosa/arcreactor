@@ -52,10 +52,35 @@ exports.upload = function(req, res){
 };
 
 exports.mash = function(req, res){
-	console.log(req.body.ids);
 	var counts = [];
     for (i=0;i<10;i++) {
-     counts.push(Math.floor(Math.random()*10))
+      counts.push(Math.floor(Math.random()*10))
     }
-	res.render("mash", {title: 'Mashup', counts: counts, ids: req.body.ids});
+	var mongoIDs = req.body.songs,
+	artists = [],
+	names = [],
+	ids = [],
+	links = [];
+	Song.find({_id: {$in: mongoIDs}}).exec(function(err, data){
+		console.log(data);
+		if (data.length < 2) {
+			console.log('Please select more than one song!')
+		}
+		else {
+			for (i in data){
+				artists.push(data[i].artist);
+				names.push(data[i].name);
+				console.log(data[i]['id'])
+				ids.push(data[i]['id']);
+				links.push(data[i].src);
+			}
+			res.render("mash", {
+		      title: 'Arc Reactor',
+			  artists: artists,
+			  names: names,
+			  ids: ids,
+			  counts: counts
+		    });
+		}
+	});
 };

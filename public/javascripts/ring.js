@@ -23,6 +23,14 @@ var svg = d3.select(".chord").append("svg")
   .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+
+function renderRing(beats) {
+    var path = svg.selectAll("path")
+        .data(pie(beats))
+        .enter().append("path")
+        .attr("fill", function(d, i) {return color(beats)})
+}
+
 var path = svg.selectAll("path")
     .data(pie(dataset.counts))
   .enter().append("path")
