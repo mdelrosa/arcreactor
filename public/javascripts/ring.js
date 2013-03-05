@@ -29,12 +29,14 @@ function renderRing(beats) {
         .data(pie(beats))
         .enter().append("path")
         .attr("fill", function(d, i) {return color(beats)})
+        .attr("base_color", function(d, i) { return color(dataset.counts[i]); })
+        .attr("d", arc)
 }
 
 var path = svg.selectAll("path")
     .data(pie(dataset.counts))
-  .enter().append("path")
-    .attr("fill", function(d, i) { return color(dataset.counts[i]); })
+    .enter().append("path")
+    .attr("fill", function(d, i) {return color(dataset.counts[i])})
     .attr("base_color", function(d, i) { return color(dataset.counts[i]); })
     .attr("d", arc)
     // .attr("url_string", function(d, i) { return dataset.urls[i];})
