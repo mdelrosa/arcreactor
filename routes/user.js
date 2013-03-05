@@ -70,7 +70,6 @@ exports.mash = function(req, res){
 			for (i in data){
 				artists.push(data[i].artist);
 				names.push(data[i].name);
-				console.log(data[i]['id'])
 				ids.push(data[i]['id']);
 				links.push(data[i].src);
 			}
@@ -79,7 +78,8 @@ exports.mash = function(req, res){
 			  artists: artists,
 			  names: names,
 			  ids: ids,
-			  counts: counts
+			  counts: counts,
+			  links: links
 		    });
 		}
 	});

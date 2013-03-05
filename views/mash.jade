@@ -1,9 +1,20 @@
 extends layout
 
 block content
+  
+  div.audio
+    div.currentAudio
+    div.currentTime
+    audio.audioMain(src='none')
+
+  div.links(name=links)
 
   div.chord(name=ids)
-    h2(id='song-title', class='text-center')|Song Title
+      h5(id='song-title', class='text-center')|Song Title
+
+  div.span8
+    div.songsTarget
+      h4 Mashup Songs
 
   script
 
@@ -14,3 +25,4 @@ block content
   script(src="/javascripts/remix.js")
   script(src='/javascripts/beats.js')
   script(src="/javascripts/ring.js")
+  script(src='/javascripts/switch.js')

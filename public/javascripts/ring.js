@@ -25,13 +25,19 @@ var svg = d3.select(".chord").append("svg")
 
 
 function renderRing(beats) {
-    console.log('here')
     var path = svg.selectAll("path")
         .data(pie(beats))
         .enter().append("path")
         .attr("fill", function(d, i) {return color(beats[i])})
         .attr("base_color", function(d, i) { return color(beats[i]); })
         .attr("d", arc)
+        .on("mouseover", function(){
+          d3.select(this).style("fill", "#DDDDDD");
+        })
+        .on("mouseout", function(){
+          d3.select(this).style("fill", function() { return d3.select(this).attr("base_color"); });
+        })  
+        .on("click", function(){});
 }
 
 var path = svg.selectAll("path")
@@ -50,7 +56,9 @@ var path = svg.selectAll("path")
             // $(".artist").html("<b>" + artist + ": " + count + " listens<b>");
         })
     .on("mouseout", function(){
-        d3.select(this).style("fill", function() { return d3.select(this).attr("base_color"); });
+        d3.select(this).style("fill", function() {
+         return d3.select(this).attr("base_color"); 
+     });
         // $(".artist").html("");
     })
     .on("click", function(){
