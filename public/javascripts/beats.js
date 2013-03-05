@@ -119,10 +119,10 @@ $(document).ready(function() {
 
   function updateName () {
     if (window.tracks === undefined) {
-      $("#song-title").text('Loading mashup...')
+      $("#song-title").text('Loading Mashup...')
     }
     else {
-      $("#song-title").text(window.tracks[window.currentIndex].title)
+      $("#song-title").text(window.tracks[1-window.currentIndex].title)
     }
   }
 
