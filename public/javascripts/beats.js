@@ -47,6 +47,17 @@ $(document).ready(function() {
     if (num<1){
       console.log('base case');
       console.log(tracks);
+      var beats = [];
+      var durations = [];
+      for (i=0;i<tracks.length;i++) {
+        var beatArray = tracks[i].analysis.bars;
+        for (j=0;j<beatArray.length;j++) {
+          beats.push(beatArray[j]);
+          durations.push(beatArray[j].duration);
+        }
+      }
+      console.log(durations.length);
+      renderRing(durations);
     }
     else{
       remixer.remixTrackById(trackIDs[num-1], trackURL, function(t, percent){

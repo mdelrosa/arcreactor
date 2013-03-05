@@ -25,23 +25,24 @@ var svg = d3.select(".chord").append("svg")
 
 
 function renderRing(beats) {
+    console.log('here')
     var path = svg.selectAll("path")
         .data(pie(beats))
         .enter().append("path")
-        .attr("fill", function(d, i) {return color(beats)})
-        .attr("base_color", function(d, i) { return color(dataset.counts[i]); })
+        .attr("fill", function(d, i) {return color(beats[i])})
+        .attr("base_color", function(d, i) { return color(beats[i]); })
         .attr("d", arc)
 }
 
 var path = svg.selectAll("path")
-    .data(pie(dataset.counts))
-    .enter().append("path")
-    .attr("fill", function(d, i) {return color(dataset.counts[i])})
-    .attr("base_color", function(d, i) { return color(dataset.counts[i]); })
-    .attr("d", arc)
-    // .attr("url_string", function(d, i) { return dataset.urls[i];})
-    // .attr("name", function(d, i) { return dataset.names[i]; })
-    .attr("count", function(d, i) { return dataset.counts[i]; })
+    // .data(pie(dataset.counts))
+    // .enter().append("path")
+    // .attr("fill", function(d, i) {return color(dataset.counts[i])})
+    // .attr("base_color", function(d, i) { return color(dataset.counts[i]); })
+    // .attr("d", arc)
+    // // .attr("url_string", function(d, i) { return dataset.urls[i];})
+    // // .attr("name", function(d, i) { return dataset.names[i]; })
+    // .attr("count", function(d, i) { return dataset.counts[i]; })
     .on("mouseover", function(){
             d3.select(this).style("fill", "#DDDDDD");
             // var artist = $(this).attr("name");
